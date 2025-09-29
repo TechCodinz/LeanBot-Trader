@@ -1,0 +1,60 @@
+# LeanBot-Trader Configuration
+# Copy this file to config.yaml and customize for your needs
+
+# Trading Configuration
+trading:
+  # Exchange settings
+  exchange: "binance"  # binance, coinbase, kraken, etc.
+  sandbox: true  # Use sandbox/testnet for testing
+  
+  # Trading pairs to monitor
+  symbols:
+    - "BTC/USDT"
+    - "ETH/USDT"
+    - "ADA/USDT"
+  
+  # Trading parameters
+  max_position_size: 1000.0  # Maximum position size in quote currency
+  risk_per_trade: 0.02  # Risk 2% of portfolio per trade
+  
+# Strategy Configuration
+strategy:
+  name: "simple_sma"  # Strategy to use
+  parameters:
+    short_window: 10
+    long_window: 30
+    rsi_period: 14
+    rsi_oversold: 30
+    rsi_overbought: 70
+
+# Risk Management
+risk_management:
+  max_daily_loss: 0.05  # Maximum daily loss (5% of portfolio)
+  max_drawdown: 0.15  # Maximum drawdown (15% of portfolio)
+  stop_loss_pct: 0.03  # Stop loss percentage (3%)
+  take_profit_pct: 0.06  # Take profit percentage (6%)
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/leanbot.log"
+  max_size: "10MB"
+  backup_count: 5
+
+# Notifications (optional)
+notifications:
+  enabled: false
+  webhook_url: ""  # Discord/Slack webhook URL
+  email:
+    smtp_server: ""
+    smtp_port: 587
+    username: ""
+    password: ""
+    to_email: ""
+
+# Backtesting
+backtesting:
+  start_date: "2023-01-01"
+  end_date: "2024-01-01"
+  initial_balance: 10000.0
+  commission: 0.001  # 0.1% commission

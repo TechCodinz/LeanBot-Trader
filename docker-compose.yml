@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  leanbot:
+    build: .
+    container_name: leanbot-trader
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./logs:/app/logs
+      - ./data:/app/data
+    environment:
+      - EXCHANGE_API_KEY=${EXCHANGE_API_KEY}
+      - EXCHANGE_SECRET=${EXCHANGE_SECRET}
+      - EXCHANGE_PASSPHRASE=${EXCHANGE_PASSPHRASE}
+      - SANDBOX_API_KEY=${SANDBOX_API_KEY}
+      - SANDBOX_SECRET=${SANDBOX_SECRET}
+    command: python main.py run --config config.yaml
+    
+  # Optional: Add a monitoring service
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   container_name: watchtower
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   command: --interval 300 leanbot-trader
+  #   restart: unless-stopped
